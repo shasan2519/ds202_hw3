@@ -1,0 +1,90 @@
+---
+title: "ds202_hw3"
+author: "Syed Hasan"
+date: "2/18/2020"
+output: html_document
+---
+```{r}
+chooseCRANmirror(graphics = FALSE, ind=1)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages("lmtest")
+install.packages('lmtest', repos = "http://cran.us.r-project.org")
+install.packages('reshape2')
+data(tips, package="reshape2")
+```
+
+
+```{r}
+#Question 1
+numParty <- nrow(tips)
+numParty
+```
+Question 1
+
+There were 244 Parties served
+
+
+
+```{r}
+#Question 2
+str(tips)
+```
+Question 2
+
+there are 7 columns, but with only three kind of variable num, Factor and int
+
+Question 3
+```{r}
+#Question 3
+day <- tips
+day <- day[order(day$day),]
+day
+```
+```{r}
+#Question 4
+female5 <- subset(tips, sex=="Female" & size >= 5,)
+female5
+```
+
+Question 5
+```{r}
+install.packages("ggplot2")
+library("ggplot2")
+ggplot(data=tips, aes(x=total_bill, y=tip))+geom_jitter()
+```
+
+clearly the tip increases as the tota_bill increases
+
+Question 6
+
+Not a lot of people tip more than $4-$5 range. With only some outliers at $9-$10 tips
+
+Question 7
+```{r}
+tiprate<-((mean(tips$tip)/mean(tips$total_bill))*100)
+tiprate
+```
+The average tip rate is 15.15358
+
+Question 8
+```{r}
+dinnerTip<- subset(tips, time == "Dinner" & tip)
+lunchTip<- subset(tips, time == "Lunch" & tip)
+mean(lunchTip$tip)
+mean(dinnerTip$tip)
+```
+People spend more on tips during dinner time when compared to lunch time
+
+Question 9
+
+NOT DONE
+
+Question 10
+```{r}
+ggplot(data=tips, aes(x=day, fill=sex))+geom_bar()
+```
+more females are eating outside on SAT, SUN and THUR.
+
